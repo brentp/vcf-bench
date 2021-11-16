@@ -4,6 +4,7 @@
 the timed task will be to:
 iterate over each row in a VCF, extract a value from the INFO field (an
 integer), add it to a vector and report the mean at the end.
+The exact task is useless, but it gives an idea of relative performance.
 
 # Summary
 
@@ -19,6 +20,8 @@ Individual runs are below. `rust-htslib` was compiled with --release and `hts-ni
 | C htslib | 3.5s | BCF |
 
 ### VCF
+
+(note that these times can be improved to nearly match the `BCF` speeds above using `bcf_subset_samples` when possible).
 
 | Tool  | Time   | File |
 |-------|--------|------|
