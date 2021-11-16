@@ -23,7 +23,7 @@ zig was compiled with -Drelease-fast.
 
 ### VCF
 
-(note that these times can be improved to nearly match the `BCF` speeds above using `bcf_subset_samples` when possible).
+(note that these times can be improved to nearly match the `BCF` speeds above using [bcf_hdr_set_samples](https://github.com/samtools/htslib/blob/238fe32d8c7aa05d3ac75d2249c61d8e268be58f/htslib/vcf.h#L323-L345) when possible).
 
 | Tool  | Time   | File |
 |-------|--------|------|
