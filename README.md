@@ -11,11 +11,14 @@ The exact task is useless, but it gives an idea of relative performance.
 Individual runs are below. `rust-htslib` was compiled with --release and `hts-nim` was compiled with -d:danger and uses libdeflate. C htslib uses libdeflate and is compiled with -O2.
 zig was compiled with -Drelease-fast.
 
+Note that tools using libdeflate are substantially faster 
+
 ### BCF
 
 | Tool  | Time   | File |
 |-------|--------|------|
 | cyvcf2 | 8.15s | BCF  |
+| cyvcf2 (libdeflate) | 4.0s | BCF  |
 | pysam | 3.8s | BCF  |
 | rust-htslib | 5.8s | BCF |
 | hts-nim | 3.5s | BCF |
