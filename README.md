@@ -9,6 +9,7 @@ The exact task is useless, but it gives an idea of relative performance.
 # Summary
 
 Individual runs are below. `rust-htslib` was compiled with --release and `hts-nim` was compiled with -d:danger and uses libdeflate. C htslib uses libdeflate and is compiled with -O2.
+zig was compiled with -Drelease-fast.
 
 ### BCF
 
@@ -17,6 +18,7 @@ Individual runs are below. `rust-htslib` was compiled with --release and `hts-ni
 | cyvcf2 | 8.15s | BCF  |
 | rust-htslib | 5.8s | BCF |
 | hts-nim | 3.5s | BCF |
+| hts-zig | 3.5s | BCF |
 | C htslib | 3.5s | BCF |
 
 ### VCF
@@ -29,6 +31,7 @@ Individual runs are below. `rust-htslib` was compiled with --release and `hts-ni
 | cyvcf2 | 29s   | VCF  |
 | rust-htslib | 22s | VCF |
 | hts-nim | 18s | VCF |
+| hts-zig | 18s | BCF |
 | C htslib | 18s | VCF |
 
 
@@ -158,4 +161,28 @@ $ time ./c-htslib/read 1kg.chr1.subset.vcf.gz
 real	0m18.103s
 user	0m18.022s
 sys	0m0.076s
+```
+
+## hts-zig
+
+### BCF
+
+```
+$ time ./zig-out/bin/hts-zig ../1kg.chr1.subset.bcf 
+mean:5.992641098163443e+03
+
+real	0m3.546s
+user	0m3.465s
+sys	0m0.080s
+```
+
+### VCF
+
+```
+$ time ./zig-out/bin/hts-zig ../1kg.chr1.subset.vcf.gz 
+mean:5.992641098163443e+03
+
+real	0m18.091s
+user	0m18.011s
+sys	0m0.077s
 ```

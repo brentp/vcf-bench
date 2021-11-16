@@ -8,6 +8,7 @@ proc main() =
   var ivcf:VCF
   if not ivcf.open(f):
     quit "couldn't open input vcf"
+  #ivcf.set_samples(@["^"])
 
   var an = newSeq[int32](1)
   var li = newSeqOfCap[int64](65536)
