@@ -9,14 +9,21 @@ integer), add it to a vector and report the mean at the end.
 
 Individual runs are below. `rust-htslib` was compiled with --release and `hts-nim` was compiled with -d:danger and uses libdeflate.
 
+### BCF
+
+| Tool  | Time   | File |
+|-------|--------|------|
+| cyvcf2 | 8.15s | BCF  |
+| rust-htslib | 5.8s | BCF |
+| hts-nim | 3.5s | BCF |
+
+### VCF
+
 | Tool  | Time   | File |
 |-------|--------|------|
 | pyvcf | 16m49s | VCF  |
-| cyvcf2 | 8.15s | BCF  |
 | cyvcf2 | 29s   | VCF  |
-| rust-htslib | 5.8s | BCF |
 | rust-htslib | 22s | VCF |
-| hts-nim | 3.5s | BCF |
 | hts-nim | 18s | VCF |
 
 
