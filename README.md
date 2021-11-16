@@ -16,6 +16,7 @@ zig was compiled with -Drelease-fast.
 | Tool  | Time   | File |
 |-------|--------|------|
 | cyvcf2 | 8.15s | BCF  |
+| pysam | 3.8s | BCF  |
 | rust-htslib | 5.8s | BCF |
 | hts-nim | 3.5s | BCF |
 | hts-zig | 3.5s | BCF |
@@ -29,6 +30,7 @@ zig was compiled with -Drelease-fast.
 |-------|--------|------|
 | pyvcf | 16m49s | VCF  |
 | cyvcf2 | 29s   | VCF  |
+| pysam | 28s   | VCF  |
 | rust-htslib | 22s | VCF |
 | hts-nim | 18s | VCF |
 | hts-zig | 18s | BCF |
@@ -185,4 +187,30 @@ mean:5.992641098163443e+03
 real	0m18.091s
 user	0m18.011s
 sys	0m0.077s
+```
+
+## python-pysam
+
+### BCF
+
+```
+$ time python python-pysam/read.py 1kg.chr1.subset.bcf 
+[E::idx_find_and_load] Could not retrieve index file for '1kg.chr1.subset.bcf'
+5992.641098163443
+
+real	0m3.866s
+user	0m3.726s
+sys	0m0.137s
+```
+
+### VCF
+
+```
+$ time python python-pysam/read.py 1kg.chr1.subset.vcf.gz 
+[E::idx_find_and_load] Could not retrieve index file for '1kg.chr1.subset.vcf.gz'
+5992.641098163443
+
+real	0m28.743s
+user	0m28.570s
+sys	0m0.166s
 ```
