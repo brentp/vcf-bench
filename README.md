@@ -7,7 +7,7 @@ integer), add it to a vector and report the mean at the end.
 
 # Summary
 
-Individual runs are below. `rust-htslib` was compiled with --release and `hts-nim` was compiled with -d:danger and uses libdeflate.
+Individual runs are below. `rust-htslib` was compiled with --release and `hts-nim` was compiled with -d:danger and uses libdeflate. C htslib uses libdeflate and is compiled with -O2.
 
 ### BCF
 
@@ -16,6 +16,7 @@ Individual runs are below. `rust-htslib` was compiled with --release and `hts-ni
 | cyvcf2 | 8.15s | BCF  |
 | rust-htslib | 5.8s | BCF |
 | hts-nim | 3.5s | BCF |
+| C htslib | 3.5s | BCF |
 
 ### VCF
 
@@ -25,6 +26,7 @@ Individual runs are below. `rust-htslib` was compiled with --release and `hts-ni
 | cyvcf2 | 29s   | VCF  |
 | rust-htslib | 22s | VCF |
 | hts-nim | 18s | VCF |
+| C htslib | 18s | VCF |
 
 
 # testing data
@@ -128,4 +130,29 @@ $ time ./nim-hts-nim/read ./1kg.chr1.subset.vcf.gz
 real    0m18.346s
 user    0m18.276s
 sys     0m0.068s
+```
+
+## C htslib
+
+
+### BCF
+
+```
+$ time ./c-htslib/read 1kg.chr1.subset.bcf 
+5992.64
+
+real	0m3.528s
+user	0m3.463s
+sys	0m0.064s
+```
+
+### VCF
+
+```
+$ time ./c-htslib/read 1kg.chr1.subset.vcf.gz 
+5992.64
+
+real	0m18.103s
+user	0m18.022s
+sys	0m0.076s
 ```
