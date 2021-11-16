@@ -34,7 +34,3 @@ pub fn main() anyerror!void {
 
     try stdout.print("mean:{any}\n", .{s / @intToFloat(f64, values.items.len)});
 }
-
-test "basic test" {
-    try std.testing.expectEqual(10, 3 + 7);
-}
