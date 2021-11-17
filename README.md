@@ -21,7 +21,7 @@ Note that tools using libdeflate are substantially faster
 | cyvcf2 (libdeflate) | 3.9s | BCF  |
 | pysam | 3.8s | BCF  |
 | rust-htslib | 5.8s | BCF |
-| rust-htslib (libdeflate) | 3.7s | BCF |
+| rust-htslib (libdeflate) | 3.5s | BCF |
 | hts-nim | 3.5s | BCF |
 | hts-zig | 3.5s | BCF |
 | C htslib | 3.5s | BCF |

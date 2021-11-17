@@ -7,17 +7,17 @@ fn main() {
     let path = &*args[1];
     let mut bcf = Reader::from_path(path).expect("couldn't open input vcf");
 
-    let mut li: Vec<i32> = Vec::new();
+    let mut li: Vec<i64> = Vec::new();
 
     for r in bcf.records() {
         let rec = r.expect("error getting record");
 
         if let Some(v) = rec.info(b"AN").integer().expect("error acessing info") {
-            li.push(v[0]);
+            li.push(v[0] as i64);
         }
     }
     let mut stderr = std::io::stderr();
-    let s: i32 = li.iter().sum();
+    let s: i64 = li.iter().sum();
 
     writeln!(stderr, "sum: {}, avg:{}", s, s as f64 / li.len() as f64)
         .expect("error writing to stderr");
