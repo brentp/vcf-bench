@@ -26,10 +26,8 @@ pub fn main() anyerror!void {
         try values.append(ans.items[0]);
     }
     var s: f64 = 0;
-    var i: usize = 0;
-    while (i < values.items.len) {
-        s += @intToFloat(f64, values.items[i]);
-        i += 1;
+    for (values.items) |value| {
+        s += @intToFloat(f64, value);
     }
 
     try stdout.print("mean:{any}\n", .{s / @intToFloat(f64, values.items.len)});
