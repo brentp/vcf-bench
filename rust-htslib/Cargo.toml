@@ -6,4 +6,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rust-htslib = { version = "*", path="/home/brentp/src/rust-htslib/" }
+#rust-htslib = { version = "*", path="/home/brentp/src/rust-htslib/" }
+rust-htslib = { version = "*", features = ["libdeflate"] }
