@@ -35,6 +35,7 @@ Note that tools using libdeflate are substantially faster
 | pyvcf | 16m49s | VCF  |
 | cyvcf2 | 29s   | VCF  |
 | cyvcf2 (libdeflate) | 20s   | VCF  |
+| go-vcfgo | 19s | VCF |
 | pysam | 28s   | VCF  |
 | rust-htslib | 19s | VCF |
 | hts-nim | 18s | VCF |
@@ -218,4 +219,17 @@ $ time python python-pysam/read.py 1kg.chr1.subset.vcf.gz
 real	0m28.743s
 user	0m28.570s
 sys	0m0.166s
+```
+
+
+## go-vcfgo
+
+### VCF
+
+```
+$ time ./go-vcfgo/go-vcfgo 1kg.chr1.subset.vcf.gz 
+5992.641
+real	0m12.890s
+user	0m19.456s
+sys	0m0.787s
 ```
