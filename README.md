@@ -35,6 +35,7 @@ Note that tools using libdeflate are substantially faster
 | pyvcf | 16m49s | VCF  |
 | cyvcf2 | 29s   | VCF  |
 | cyvcf2 (libdeflate) | 20s   | VCF  |
+| js-gmodvcf | 24s | VCF |
 | go-vcfgo | 19s | VCF |
 | pysam | 28s   | VCF  |
 | rust-htslib | 19s | VCF |
@@ -232,4 +233,18 @@ $ time ./go-vcfgo/go-vcfgo 1kg.chr1.subset.vcf.gz
 real	0m12.890s
 user	0m19.456s
 sys	0m0.787s
+```
+
+
+## javascript gmod/vcf
+
+(node v16)
+
+```
+$ time node js-vcf-js/index.js 1kg.chr1.subset.vcf.gz 
+5992.641098163443
+
+real	0m23.122s
+user	0m24.848s
+sys	0m3.151s
 ```
