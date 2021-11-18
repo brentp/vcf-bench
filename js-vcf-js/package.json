@@ -1,0 +1,10 @@
+{
+  "name": "js-vcf-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Colin",
+  "license": "MIT",
+  "dependencies": {
+    "@gmod/vcf": "^5.0.2"
+  }
+}
