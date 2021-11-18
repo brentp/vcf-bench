@@ -1,13 +1,11 @@
 const std = @import("std");
 const vcf = @import("./vcf.zig");
 const stdout = std.io.getStdOut().writer();
+const allocator = std.heap.c_allocator;
+//const allocator = std.testing.allocator;
 
 pub fn main() anyerror!void {
-    var allocator = std.heap.c_allocator;
-    var args = std.process.args();
-    _ = args.skip();
-    var fname = try args.next(allocator).?;
-    defer allocator.free(fname);
+    const fname = std.mem.sliceTo(std.os.argv[1], 0);
 
     var ivcf = vcf.VCF.open(fname).?;
     defer ivcf.deinit();
