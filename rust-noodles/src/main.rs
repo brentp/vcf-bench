@@ -30,7 +30,7 @@ fn main() -> io::Result<()> {
 
     let mut bcf = fs::File::open(path)
         .map(io::BufReader::new)
-        .map(bcf::Reader::from)?;
+        .map(bcf::Reader::new)?;
     bcf.read_file_format()?;
 
     let raw_header = bcf.read_header()?;

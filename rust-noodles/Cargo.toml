@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-noodles-vcf = { git = "https://github.com/zaeleus/noodles", rev = "3a17554" }
-noodles-bcf = { git = "https://github.com/zaeleus/noodles", rev = "3a17554" }
+noodles-vcf = { git = "https://github.com/zaeleus/noodles", rev = "333b312" }
+noodles-bcf = { git = "https://github.com/zaeleus/noodles", rev = "333b312" }
