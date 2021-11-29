@@ -20,7 +20,7 @@ fn get_allele_count(
         .get(header, string_map, &Key::TotalAlleleCount)
         .transpose()?
         .and_then(|field| match field.value() {
-            Some(Value::Integer(depth)) => Some(*depth),
+            Some(Value::Integer(allele_count)) => Some(*allele_count),
             _ => None,
         }))
 }
@@ -37,13 +37,13 @@ fn main() -> io::Result<()> {
     let header = raw_header.parse().expect("error parsing header");
     let string_map = raw_header.parse().expect("error parsing header");
 
-    let depths = bcf
+    let allele_counts = bcf
         .records()
         .map(|record| get_allele_count(record, &header, &string_map))
         .collect::<io::Result<Option<Vec<i32>>>>()?
         .expect("missing or unexpected AN field");
 
-    let total = depths.iter().sum::<i32>();
-    let n = depths.len();
+    let total = allele_counts.iter().sum::<i32>();
+    let n = allele_counts.len();
     writeln!(io::stderr(), "{}", total as f64 / n as f64)
 }
