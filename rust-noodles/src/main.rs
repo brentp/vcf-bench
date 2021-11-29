@@ -1,49 +1,49 @@
-use noodles_bcf::{
-    self as bcf, 
+use std::{
+    env, fs,
+    io::{self, Write},
 };
+
+use noodles_bcf as bcf;
+
 use noodles_vcf::{
-    record::{info::{field::{Key, Value}}},
-    header::{Number, info::Type},
+    self as vcf,
+    record::info::field::{Key, Value},
 };
-//use bcf::record::{value::Value};
-use std::fs::{File};
-use std::io::Write;
 
+fn get_allele_count(
+    record: io::Result<bcf::Record>,
+    header: &vcf::Header,
+    string_map: &bcf::header::StringMap,
+) -> io::Result<Option<i32>> {
+    Ok(record?
+        .info()
+        .get(header, string_map, &Key::TotalAlleleCount)
+        .transpose()?
+        .and_then(|field| match field.value() {
+            Some(Value::Integer(allele_count)) => Some(*allele_count),
+            _ => None,
+        }))
+}
 
-fn main() {
-    // NOTE: must use a modified BCF with AD,Number=. changed to AD,Number=A due to strict checking
-    // of VCF
-    let args: Vec<String> = std::env::args().collect();
-    let path = &*args[1];
+fn main() -> io::Result<()> {
+    let path = env::args().nth(1).expect("missing BCF path");
 
+    let mut bcf = fs::File::open(path)
+        .map(io::BufReader::new)
+        .map(bcf::Reader::from)?;
+    bcf.read_file_format()?;
 
-    let mut bcf = File::open(path).map(bcf::Reader::new).expect("couldn't open bcf");
-    let mut stderr = std::io::stderr();
-    bcf.read_file_format().expect("error reading file format");
-    let mut raw_hdr = bcf.read_header().expect("invalid header");
-    let header = raw_hdr.parse().expect("error parsing header");
-    let string_map = raw_hdr.parse().expect("error parsing header");
+    let raw_header = bcf.read_header()?;
+    let header = raw_header.parse().expect("error parsing header");
+    let string_map = raw_header.parse().expect("error parsing header");
 
-    //let key = Key::Other(std::string::String::from("AN"), Number::Count(1), Type::Integer, std::string::String::from(""));
-    let key = Key::TotalAlleleCount;
-    let mut li: Vec<i64> = Vec::new();
+    let allele_counts = bcf
+        .records()
+        .map(|record| get_allele_count(record, &header, &string_map))
+        .collect::<io::Result<Option<Vec<i32>>>>()?
+        .expect("missing or unexpected AN field");
 
-    for r in bcf.records() {
-        let bcf_rec = r.expect("error getting record");
-        // NOTE: get an error here
-        let mut rec = bcf_rec.try_into_vcf_record(&header, &string_map).expect("error converting to vcf record");
-        let dp = rec.info().get(&key)
-            .map(|field| field.value())
-            .map(|value| match value {
-                Value::Integer(n) => *n,
-                _ => -1,
-            }).unwrap();
-        li.push(dp as i64);
-    }
-
-     let s: i64 = li.iter().sum();
-     writeln!(stderr, "{}", s as f64 / li.len() as f64)
-        .expect("error writing to stderr");
-
-
+    let total = allele_counts.iter().sum::<i32>();
+    let n = allele_counts.len();
+    writeln!(io::stderr(), "{}", total as f64 / n as f64)
 }
