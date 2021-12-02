@@ -12,11 +12,11 @@ use noodles::{
 };
 
 fn get_allele_count(
-    record: io::Result<bcf::Record>,
+    record: &bcf::Record,
     header: &vcf::Header,
     string_map: &bcf::header::StringMap,
 ) -> io::Result<Option<i32>> {
-    Ok(record?
+    Ok(record
         .info()
         .get(header, string_map, &Key::TotalAlleleCount)
         .transpose()?
@@ -38,11 +38,14 @@ fn main() -> io::Result<()> {
     let header = raw_header.parse().expect("error parsing header");
     let string_map = raw_header.parse().expect("error parsing header");
 
-    let allele_counts = reader
-        .records()
-        .map(|record| get_allele_count(record, &header, &string_map))
-        .collect::<io::Result<Option<Vec<i32>>>>()?
-        .expect("missing or unexpected AN field");
+    let mut record = bcf::Record::default();
+    let mut allele_counts = Vec::new();
+
+    while reader.read_record(&mut record)? != 0 {
+        let allele_count = get_allele_count(&record, &header, &string_map)?
+            .expect("missing or unexpected AN field");
+        allele_counts.push(allele_count);
+    }
 
     let total = allele_counts.iter().sum::<i32>();
     let n = allele_counts.len();
