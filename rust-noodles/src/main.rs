@@ -29,16 +29,16 @@ fn get_allele_count(
 fn main() -> io::Result<()> {
     let path = env::args().nth(1).expect("missing BCF path");
 
-    let mut bcf = fs::File::open(path)
+    let mut reader = fs::File::open(path)
         .map(io::BufReader::new)
         .map(bcf::Reader::new)?;
-    bcf.read_file_format()?;
+    reader.read_file_format()?;
 
-    let raw_header = bcf.read_header()?;
+    let raw_header = reader.read_header()?;
     let header = raw_header.parse().expect("error parsing header");
     let string_map = raw_header.parse().expect("error parsing header");
 
-    let allele_counts = bcf
+    let allele_counts = reader
         .records()
         .map(|record| get_allele_count(record, &header, &string_map))
         .collect::<io::Result<Option<Vec<i32>>>>()?
