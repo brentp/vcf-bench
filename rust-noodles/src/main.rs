@@ -3,11 +3,12 @@ use std::{
     io::{self, Write},
 };
 
-use noodles_bcf as bcf;
-
-use noodles_vcf::{
-    self as vcf,
-    record::info::field::{Key, Value},
+use noodles::{
+    bcf,
+    vcf::{
+        self,
+        record::info::field::{Key, Value},
+    },
 };
 
 fn get_allele_count(
