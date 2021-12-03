@@ -22,7 +22,7 @@ Note that tools using libdeflate are substantially faster
 | pysam | 3.8s | BCF  |
 | rust-htslib | 5.8s | BCF |
 | rust-htslib (libdeflate) | 3.5s | BCF |
-| rust-noodles | 6.3s | BCF |
+| rust-noodles (libdeflate) | 3.6s | BCF |
 | hts-nim | 3.5s | BCF |
 | hts-zig | 3.5s | BCF |
 | C htslib | 3.5s | BCF |
@@ -130,12 +130,12 @@ sys     0m0.116s
 ### BCF
 
 ```
-$ time rust-noodles/target/release/rust-noodles 1kg.chr1.subset.bcf
+$ time ./rust-noodles/target/release/rust-noodles 1kg.chr1.subset.bcf 
 5992.641098163443
 
-real	0m6.296s
-user	0m6.239s
-sys	0m0.056s
+real	0m3.685s
+user	0m3.608s
+sys	0m0.073s
 ```
 
 ## hts-nim
