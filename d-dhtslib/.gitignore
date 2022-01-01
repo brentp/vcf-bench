@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/read
+read.so
+read.dylib
+read.dll
+read.a
+read.lib
+read-test-*
+*.exe
+*.o
+*.obj
+*.lst
