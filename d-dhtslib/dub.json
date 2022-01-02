@@ -1,0 +1,12 @@
+{
+	"authors": [
+		"Charles Gregory"
+	],
+	"copyright": "Copyright © 2022, Charles Gregory",
+	"dependencies": {
+		"dhtslib": "~>0.13.3"
+	},
+	"description": "evaluating vcf parsing with dhtslib",
+	"license": "MIT",
+	"name": "read"
+}
