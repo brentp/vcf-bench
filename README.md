@@ -23,6 +23,7 @@ Note that tools using libdeflate are substantially faster
 | rust-htslib | 5.8s | BCF |
 | rust-htslib (libdeflate) | 3.5s | BCF |
 | rust-noodles (libdeflate) | 3.6s | BCF |
+| d-htslib (libdeflate) | 4.6s | BCF |
 | hts-nim | 3.5s | BCF |
 | hts-zig | 3.5s | BCF |
 | C htslib | 3.5s | BCF |
@@ -40,6 +41,7 @@ Note that tools using libdeflate are substantially faster
 | go-vcfgo | 19s | VCF |
 | pysam | 28s   | VCF  |
 | rust-htslib | 19s | VCF |
+| d-htslib | 19s | VCF |
 | hts-nim | 18s | VCF |
 | hts-zig | 18s | BCF |
 | C htslib | 18s | VCF |
@@ -263,3 +265,26 @@ user	0m24.848s
 sys	0m3.151s
 ```
 
+## d-htslib
+
+### BCF
+
+```
+$ time ./d-dhtslib/read 1kg.chr1.subset.bcf 
+sum: 158906864, avg: 5992.641098
+
+real	0m4.670s
+user	0m6.014s
+sys	0m0.662s
+```
+
+### VCF
+
+```
+$ time ./d-dhtslib/read 1kg.chr1.subset.vcf.gz 
+sum: 158906864, avg: 5992.641098
+
+real	0m19.095s
+user	0m23.688s
+sys	0m0.570s
+```
