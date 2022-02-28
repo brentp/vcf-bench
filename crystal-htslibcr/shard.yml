@@ -1,0 +1,7 @@
+name: vcf-bench
+version: 0.0.1
+
+dependencies:
+  htslib:
+    github: bio-crystal/htslib.cr
+
