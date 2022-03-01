@@ -25,6 +25,7 @@ Note that tools using libdeflate are substantially faster
 | rust-noodles (libdeflate) | 3.6s | BCF |
 | d-htslib (libdeflate) | 4.6s | BCF |
 | hts-nim | 3.5s | BCF |
+| crystal-htslib | 3.6s | BCF |
 | hts-zig | 3.5s | BCF |
 | C htslib | 3.5s | BCF |
 
@@ -43,6 +44,7 @@ Note that tools using libdeflate are substantially faster
 | rust-htslib | 19s | VCF |
 | d-htslib | 19s | VCF |
 | hts-nim | 18s | VCF |
+| crystal-htslib | 19s | BCF |
 | hts-zig | 18s | BCF |
 | C htslib | 18s | VCF |
 
@@ -287,4 +289,28 @@ sum: 158906864, avg: 5992.641098
 real	0m19.095s
 user	0m23.688s
 sys	0m0.570s
+```
+
+## crystal-htslib
+
+### BCF
+
+```
+$ time crystal-htslibcr/read 1kg.chr1.subset.bcf 
+sum: 158906864, avg: 5992.641098163443
+
+real	0m3.691s
+user	0m3.597s
+sys	0m0.093s
+```
+
+### VCF
+
+```
+$ time crystal-htslibcr/read 1kg.chr1.subset.vcf.gz 
+sum: 158906864, avg: 5992.641098163443
+
+real	0m18.756s
+user	0m18.638s
+sys	0m0.112s
 ```
